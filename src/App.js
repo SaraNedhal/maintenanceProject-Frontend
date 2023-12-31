@@ -17,6 +17,7 @@ function App() {
    //them store user in state
    const [user, setUser] = useState({});
  
+   const [isSignedup, setIsSignedup] = useState(false);
    useEffect(() => {
      const user = getUser();
      console.log(user);
@@ -35,6 +36,7 @@ function App() {
      Axios.post("auth/signup", user)
        .then((res) => {
          console.log(res);
+         setIsSignedup(true);
        })
        .catch((error) => {
          console.log(error);
@@ -86,7 +88,7 @@ function App() {
   return (
 
     <div className="App">
-      <nav>
+      {/* <nav>
          <HomePage></HomePage>
         <Link to="/">Home</Link>
         <Link to="/signin">Signin</Link>
@@ -94,15 +96,53 @@ function App() {
      <HomePage></HomePage>
   
       </nav>
-      <Signin />
+
+      <Signin /> */}
+       <nav>
+       { isAuth ?
+        (
+        <div>
+          {/* &nbsp; non breakable space -> add a space between the links */}
+          <Link to="/">Home</Link> &nbsp;
+          <Link to="/logout" onClick={onLogoutHandler}>Logout</Link>&nbsp;
+          <Link to="/category/index">Category</Link>&nbsp;
+
+        </div>
+        ) 
+        // else if the user is not authenticated then show this nav bar
+        : 
+        
+         (
+
+          <div>
+          {/* &nbsp; non breakable space -> add a space between the links */}
+          <Link to="/">Home</Link> &nbsp;
+          <Link to="/signup">Signup</Link> &nbsp;
+          <Link to="/signin">Signin</Link> &nbsp;
+          <Link to="/category/index">Category</Link> &nbsp;
+
+        </div>
+
+        )
+        
+        }
+      </nav>
+
+        <Routes>
+          {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
+          <Route path="/" element={isAuth ?<HomePage /> :<Signin login={loginHandler}></Signin>}></Route>
+          <Route
+            path="/signup"
+            element={isSignedup ? <Signin login={loginHandler}></Signin> : <Signup register={registerHandler}/>}
+          ></Route>
+          <Route
+            path="/signin"
+            element ={ isAuth ? <HomePage user={user}></HomePage> : <Signin login={loginHandler}></Signin>}
+          ></Route>
+          <Route path="/category/index" element={isAuth? <CategoryList user={user}/> : <Signup register={registerHandler}/>}></Route>
+        </Routes>
+    
       {/* <Signup/> */}
-
-
-
-
-
-
-      
     </div>
 
 

@@ -4,9 +4,10 @@ import Category from './Category';
 import  Axios  from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import CategoryCreateForn from './CategoryCreateForn';
+// import { userInfo } from 'os';
 
 
-export default function CategoryList() {
+export default function CategoryList(props) {
 
     const[category,setCategory]= useState([]);
 
@@ -14,7 +15,7 @@ export default function CategoryList() {
         loadCategoryList();
     },[])
     const loadCategoryList =()=>{
-        Axios.get("category/index")
+        Axios.get("/category/index")
         .then((response)=>{
             console.log(response);
             setCategory(response.data.categories);
@@ -24,7 +25,7 @@ export default function CategoryList() {
         })
     }
     const addCategory = (category) =>{
-        Axios.post("category/add",category)
+        Axios.post("category/add",category , props.user._id)
            .then(res =>{
             console.log("Category Added successfuly !!");
             loadCategoryList();
@@ -63,7 +64,6 @@ export default function CategoryList() {
         <div className="row">{categoryList}</div>
      </div>
 
-    <CategoryCreateForn addCategory={addCategory}></CategoryCreateForn>
     </>
   )
 }

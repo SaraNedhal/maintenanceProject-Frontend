@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function Signup() {
+export default function Signup(props) {
   const [newUser , setNewUser] = useState({});
 
   const handleChange = (event) => {
@@ -11,7 +11,7 @@ export default function Signup() {
   }
   const registerHandler = (e) => {
     e.preventDefault();
-    // props.register(newUser);
+    props.register(newUser);
     e.target.reset();
   }
 
@@ -22,15 +22,19 @@ export default function Signup() {
         <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
     
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="floatingInput" name="firstName" placeholder="name@example.com"   onChange={handleChange}/>
+          <input type="text" class="form-control" id="floatingInput" name="firstName"    onChange={handleChange}/>
           <label for="floatingInput">first Name</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  name="lastName"  onChange={handleChange}/>
+          <input type="text" class="form-control" id="floatingInput"   name="lastName"  onChange={handleChange}/>
           <label for="floatingInput">Last name</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  name="username" onChange={handleChange}/>
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  name="emailAddress"  onChange={handleChange}/>
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com"  name="username" onChange={handleChange}/>
           <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating mb-3">
