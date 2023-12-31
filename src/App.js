@@ -1,3 +1,4 @@
+
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,6 +8,9 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import Signup from "./components/user/Signup";
+import CategoryList from './components/Category/CategoryList';
+import HomePage from './components/HomePage';
+
 function App() {
    //check if user authenticated
    const [isAuth, setIsAuth] = useState(false);
@@ -80,11 +84,15 @@ function App() {
    }
  
   return (
+
     <div className="App">
       <nav>
+         <HomePage></HomePage>
         <Link to="/">Home</Link>
         <Link to="/signin">Signin</Link>
         <Link to="/signup">Signup</Link>
+     <HomePage></HomePage>
+  
       </nav>
       <Signin />
       {/* <Signup/> */}
@@ -96,6 +104,7 @@ function App() {
 
       
     </div>
+
 
 
 
