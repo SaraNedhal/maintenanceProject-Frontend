@@ -10,6 +10,7 @@ import Signup from "./components/user/Signup";
 import CategoryList from "./components/Category/CategoryList";
 import HomePage from "./components/HomePage";
 import ServicesList from "./components/services/ServicesList";
+
 import CategoryCreateForm from "./components/Category/CategoryCreateForm";
 
 function App() {
@@ -172,8 +173,22 @@ function App() {
         ></Route>
       </Routes>
 
+        <Routes>
+          {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
+          <Route path="/" element={isAuth ?<HomePage /> :<Signin login={loginHandler}></Signin>}></Route>
+          <Route
+            path="/signup"
+            element={isSignedup ? <Signin login={loginHandler}></Signin> : <Signup register={registerHandler}/>}
+          ></Route>
+          <Route
+            path="/signin"
+            element ={ isAuth ? <HomePage user={user}></HomePage> : <Signin login={loginHandler}></Signin>}
+          ></Route>
+          <Route path="/category/index" element={isAuth? <CategoryList user={user}/> :  <Signin login={loginHandler}></Signin>}></Route>
+        </Routes>
       {/* <Signup/> */}
     </div>
+
   );
 }
 
