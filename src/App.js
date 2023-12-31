@@ -10,6 +10,7 @@ import { jwtDecode } from "jwt-decode";
 import Signup from "./components/user/Signup";
 import CategoryList from './components/Category/CategoryList';
 import HomePage from './components/HomePage';
+import ServicesList from "./components/services/ServicesList";
 
 function App() {
    //check if user authenticated
@@ -97,7 +98,7 @@ function App() {
       <Signin />
       {/* <Signup/> */}
 
-
+     <ServicesList></ServicesList>
 
 
 
