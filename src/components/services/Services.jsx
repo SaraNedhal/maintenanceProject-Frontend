@@ -1,7 +1,12 @@
 import React from 'react'
 
-export default function Services() {
+export default function Services(props) {
   return (
-    <div>Services</div>
+    <>
+    <td>{props.name}</td>
+    <td>{props.serviceProvider}</td>
+    <td>{props.description}</td>
+    </>
+   
   )
 }
