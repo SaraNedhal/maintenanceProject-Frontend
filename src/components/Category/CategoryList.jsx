@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Category from './Category';
 import  Axios  from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import CategoryCreateForn from './CategoryCreateForn';
+import CategoryCreateForn from './CategoryCreateForm';
 // import { userInfo } from 'os';
 
 
@@ -24,17 +24,7 @@ export default function CategoryList(props) {
             console.log(err)
         })
     }
-    const addCategory = (category) =>{
-        Axios.post("category/add",category , props.user._id)
-           .then(res =>{
-            console.log("Category Added successfuly !!");
-            loadCategoryList();
-           })
-           .catch(err =>{
-            console.log("Error adding Category");
-            console.log(err);
-           })
-        } 
+    
     const handleCategoryClick = (category) => {
         console.log("Category clicked:",category);
     }
@@ -56,12 +46,20 @@ export default function CategoryList(props) {
 
     )) 
     
+   const loadAllServices = () => {
+        Axios.get('service/index')
+        .then()
+        .catch(error => console.log("failed to load all services for a specific category in the category list front end , " , error));
+    }
 
   return (
-    <><div>CtegoryList</div>
+    <>
      <div>
         <h3>chose a category:</h3>
-        <div className="row">{categoryList}</div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/category/add" class="btn btn-primary me-md-2" type="button">Add Category</a>
+    </div>       
+ <div className="row">{categoryList}</div>
      </div>
 
     </>
