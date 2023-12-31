@@ -11,6 +11,7 @@ import Signup from "./components/user/Signup";
 import CategoryList from './components/Category/CategoryList';
 import HomePage from './components/HomePage';
 import ServicesList from "./components/services/ServicesList";
+import RequestList from "./components/request/RequestList";
 
 function App() {
    //check if user authenticated
@@ -141,14 +142,10 @@ function App() {
             path="/signin"
             element ={ isAuth ? <HomePage user={user}></HomePage> : <Signin login={loginHandler}></Signin>}
           ></Route>
-          <Route path="/category/index" element={isAuth? <CategoryList user={user}/> : <Signup register={registerHandler}/>}></Route>
+          <Route path="/category/index" element={isAuth? <CategoryList user={user}/> :  <Signin login={loginHandler}></Signin>}></Route>
         </Routes>
-    
       {/* <Signup/> */}
     </div>
-
-
-
 
   );
 }
