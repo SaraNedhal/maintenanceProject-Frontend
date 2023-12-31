@@ -11,7 +11,7 @@ export default function Category({category,onClick}) {
     <div className="col-md-4" onClick={handleCategoryClick} >
          <div className="card">
     <a href="">
-          <img src='maintenance.png' className='card-img-top'></img>
+          <img src="maintenance.png" className='card-img-top'></img>
           <div className="card-body">
             <h5 className="card-title">{category.name}</h5>
             

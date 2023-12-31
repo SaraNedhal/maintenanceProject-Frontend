@@ -28,7 +28,7 @@ export default function HomePage() {
         
     </div>
     <div className='container'>
-    <CategoryList></CategoryList>
+    {/* <CategoryList></CategoryList> */}
     
 
     </div>
