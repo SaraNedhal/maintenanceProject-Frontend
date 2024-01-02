@@ -4,8 +4,10 @@ export default function RequestCreateForm(props) {
   const [NewRequest, setNewRequest] = useState({});
   const handleChange = (event) =>{
     const attributeToChange = event.target.name;
-    const newValue = event.target.value;
-
+    let newValue = event.target.value;
+    if(event.target.tagName == "SELECT" && event.target.multiple){
+      newValue = Array.from(event.target.options).filter((option)=>option.selected).map((option)=>option.value);
+    }
     const request = {...NewRequest}
     request[attributeToChange] = newValue;
     console.log(request);
@@ -38,7 +40,7 @@ export default function RequestCreateForm(props) {
         </div>
         */}
 
-      <select class="form-select" aria-label="Default select example" name="problem[]" onChange={handleChange}>
+      <select class="form-select" aria-label="Default select example" multiple name="problem" onChange={handleChange}>
         <option selected>Open this select menu</option>
         <option value="1">One</option>
         <option value="2">Two</option>
