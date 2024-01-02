@@ -12,6 +12,7 @@ import HomePage from "./components/HomePage";
 import ServicesList from "./components/services/ServicesList";
 
 import CategoryCreateForm from "./components/Category/CategoryCreateForm";
+import ServicesCreateForm from "./components/services/ServicesCreateForm";
 
 function App() {
   //check if user authenticated
@@ -166,6 +167,28 @@ function App() {
           element={
             isAuth ? (
               <CategoryCreateForm user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/service/index"
+          element={
+            isAuth ? (
+              <ServicesList user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/service/add"
+          element={
+            isAuth ? (
+              <ServicesCreateForm user={user} />
             ) : (
               <Signup register={registerHandler} />
             )
