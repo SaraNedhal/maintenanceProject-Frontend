@@ -4,8 +4,6 @@ import { useNavigate } from "react-router";
 
 export default function CategoryCreateForm(props) {
     const [NewCategory,setNewCategory] = useState({});
-    const [file, setFile] = useState();
-
     const navigate = useNavigate();
 
     const handelChange = (event) =>{
@@ -19,34 +17,16 @@ export default function CategoryCreateForm(props) {
 
     const handleImage = (event) => {
         console.log(event.target.files[0]);
-        setFile(event.target.files[0]);
+        props.setFile(event.target.files[0]);
 
     }
 console.log("logged user" , props.user);
-    const addCategory = (category) =>{
-        let newCategory = {
-            ...category, 
-             userId: props.user.id
-        }
-        const formData = new FormData()
-        formData.append("addCategory",JSON.stringify(newCategory))
-        formData.append("image", file)
-        Axios.post("/category/add",formData , { headers: {'Content-Type': 'multipart/form-data'}})
-           .then(res =>{
-            console.log("Category Added successfuly !!");
-            console.log(res);
-           })
-           .catch(err =>{
-            console.log("Error adding Category :" , err);
-           })
-        } 
+ 
 
-        const editCategory = () => {
-            
-        }
+       
     const handleSubmit = (event) =>{
         event.preventDefault();
-        addCategory(NewCategory);
+        props.addCategory(NewCategory);
         navigate("/category/index");
     }
 
