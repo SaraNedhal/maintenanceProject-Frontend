@@ -11,6 +11,7 @@ import Signup from "./components/user/Signup";
 import CategoryList from './components/Category/CategoryList';
 import HomePage from './components/HomePage';
 import ServicesList from "./components/services/ServicesList";
+import Userprofile from "./components/user/userProfile";
 
 function App() {
    //check if user authenticated
@@ -19,6 +20,8 @@ function App() {
    const [user, setUser] = useState({});
  
    const [isSignedup, setIsSignedup] = useState(false);
+   const [isEdit, setIsEdit] = useState(false);
+   const [currentUser, setCurrentUser] = useState({})
    useEffect(() => {
      const user = getUser();
      console.log(user);
@@ -31,6 +34,12 @@ function App() {
        setUser(null);
      }
    }, []);
+
+   useEffect(()=>{
+    if(user != null && typeof user.id != "undefined"){
+      userShowGet(user.id);
+    }
+   },[user]);
    const registerHandler = (user) => {
      // user has all the user info -> firstname and lastname, email address, password
      //passing user object with post method
@@ -67,6 +76,38 @@ function App() {
          setUser(null);
        });
    };
+   const userShowGet = (id) =>{
+     Axios.get(`/auth/user/profile?id=${id}`)
+     .then((res)=>{
+      console.log()
+      let user = res.data.user;
+      console.log("the user info 11111: " , user);
+      // setIsEdit(true)
+      setCurrentUser(user)
+
+     })
+     .catch((err)=>{
+      console.log("Error Show User Ingformation")
+      console.log(err)
+     })
+
+   }
+
+   const editUserget = (id)=>{
+    Axios.get(`auth/user/edit?id=${id}`)
+    .then((res)=>{
+      console.log(res.data.user)
+      console.log("Loaded User edit information")
+      let user = res.data.user;
+      // setIsEdit(true)
+      setCurrentUser(user)
+
+    })
+    .catch((err)=>{
+      console.log("Error loading User edit information");
+      console.log(err)
+    })
+   }
  
    const getUser = () => {
      const token = getToken();
@@ -85,6 +126,8 @@ function App() {
      setIsAuth(false);
      setUser(null);
    }
+
+   console.log("the user info ", user);
  
   return (
 
@@ -107,6 +150,7 @@ function App() {
           <Link to="/">Home</Link> &nbsp;
           <Link to="/logout" onClick={onLogoutHandler}>Logout</Link>&nbsp;
           <Link to="/category/index">Category</Link>&nbsp;
+          <Link to="/user/profile">Profile</Link>
 
         </div>
         ) 
@@ -142,6 +186,7 @@ function App() {
             element ={ isAuth ? <HomePage user={user}></HomePage> : <Signin login={loginHandler}></Signin>}
           ></Route>
           <Route path="/category/index" element={isAuth? <CategoryList user={user}/> : <Signup register={registerHandler}/>}></Route>
+          <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser}></Userprofile> : <Signup register={registerHandler}/>}></Route>
         </Routes>
     
       {/* <Signup/> */}
