@@ -7,8 +7,8 @@ export default function Request(props) {
     <td>{props.name}</td>
     <td>{props.quantity}</td>
     <td>{props.problem}</td>
-    <td><button onClick={()=> props.editView(props._id)}>Edit</button></td>
-    <td><button onClick={()=> props.deleteRequest(props._id)}>delete</button></td>
+    <td><button  type="button" class="btn btn-dark" onClick={()=> props.editView(props._id)}>Edit</button></td>
+    <td><button  type="button" class="btn btn-dark" onClick={()=> props.deleteRequest(props._id)}>delete</button></td>
     </>
     
   )

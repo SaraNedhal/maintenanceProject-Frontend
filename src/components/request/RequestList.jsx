@@ -79,6 +79,7 @@ export default function RequestList() {
   const allRequests = requests.map((request,index)=>(
     <tr key={index}>
      <Request {...request}
+     _id={request._id}
      editView={editView}
       deleteRequest={deleteRequest}
      
@@ -105,7 +106,7 @@ export default function RequestList() {
           </table>
       </div>
      
-     {!isEdit?
+     {(!isEdit)?
       <RequestCreateForm addRequest={addRequest}></RequestCreateForm>
       :
       <RequestEditForm key={currentRequests._id} request={currentRequests} updaterequest={updaterequest}></RequestEditForm>

@@ -5,8 +5,10 @@ export default function RequestEditForm(props) {
 
     const handleChange = (event) =>{
         const attributeToChange = event.target.name;
-        const newValue = event.target.value;
-
+        let newValue = event.target.value;
+        if(event.target.tagName == "SELECT" && event.target.multiple){
+          newValue = Array.from(event.target.options).filter((option)=>option.selected).map((option)=>option.value);
+        }
         const updaterequest = {...request}
         updaterequest[attributeToChange] = newValue;
         console.log(updaterequest);
@@ -41,7 +43,7 @@ export default function RequestEditForm(props) {
         </div>
         */}
 
-      <select class="form-select" aria-label="Default select example" name="problem[]" multiple onChange={handleChange}>
+      <select class="form-select" aria-label="Default select example" name="problem"  value={request.problem} multiple onChange={handleChange}>
         {/* <option disabled>Open this select menu</option> */}
         <option value="1">One</option>
         <option value="2">Two</option>
