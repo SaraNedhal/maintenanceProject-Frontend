@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 
 export default function Userprofile(props) {
-  console.log("the user from the component")
+  console.log("the user from the component", props.user)
   const [userProfile , setUserProfile] = useState(props.user);
-  // console.log(userProfile);
+  console.log(userProfile);
 
-  useEffect(() => {
-      getUserProfile();
-  }, [])
+  // useEffect(() => {
+  //     getUserProfile();
+  // }, [])
 
-  function getUserProfile() {
-    setUserProfile(props.user);
-  }
+  // function getUserProfile() {
+  //   setUserProfile(props.user);
+  // }
 
   return (
     <div class="form-signin w-75 m-auto mx-auto my-5">
