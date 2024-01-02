@@ -1,4 +1,3 @@
-
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,10 +7,13 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import Signup from "./components/user/Signup";
-import CategoryList from './components/Category/CategoryList';
-import HomePage from './components/HomePage';
+import CategoryList from "./components/Category/CategoryList";
+import HomePage from "./components/HomePage";
 import ServicesList from "./components/services/ServicesList";
 import Userprofile from "./components/user/userProfile";
+
+import CategoryCreateForm from "./components/Category/CategoryCreateForm";
+import ServicesCreateForm from "./components/services/ServicesCreateForm";
 
 function App() {
    //check if user authenticated
@@ -129,8 +131,12 @@ function App() {
 
    console.log("the user info ", user);
  
-  return (
+  
+  
+  
 
+
+  return (
     <div className="App">
       {/* <nav>
          <HomePage></HomePage>
@@ -142,58 +148,110 @@ function App() {
       </nav>
 
       <Signin /> */}
-       <nav>
-       { isAuth ?
-        (
-        <div>
-          {/* &nbsp; non breakable space -> add a space between the links */}
-          <Link to="/">Home</Link> &nbsp;
-          <Link to="/logout" onClick={onLogoutHandler}>Logout</Link>&nbsp;
-          <Link to="/category/index">Category</Link>&nbsp;
-          <Link to="/user/profile">Profile</Link>
 
-        </div>
-        ) 
-        // else if the user is not authenticated then show this nav bar
-        : 
-        
-         (
-
+      <nav>
+        {isAuth ? (
 
           <div>
-          {/* &nbsp; non breakable space -> add a space between the links */}
-          <Link to="/">Home</Link> &nbsp;
-          <Link to="/signup">Signup</Link> &nbsp;
-          <Link to="/signin">Signin</Link> &nbsp;
-          <Link to="/category/index">Category</Link> &nbsp;
+            {/* &nbsp; non breakable space -> add a space between the links */}
+            <Link to="/">Home</Link> &nbsp;
+            <Link to="/logout" onClick={onLogoutHandler}>
+              Logout
+            </Link>
+            &nbsp;
+            <Link to="/category/index">Category</Link>&nbsp;
+          <Link to="/user/profile">Profile</Link>
 
-        </div>
-
-        )
-        
-        }
+          </div>
+        ) : (
+          // else if the user is not authenticated then show this nav bar
+          <div>
+            {/* &nbsp; non breakable space -> add a space between the links */}
+            <Link to="/">Home</Link> &nbsp;
+            <Link to="/signup">Signup</Link> &nbsp;
+            <Link to="/signin">Signin</Link> &nbsp;
+            <Link to="/category/index">Category</Link> &nbsp;
+          </div>
+        )}
       </nav>
 
-        <Routes>
-          {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
-          <Route path="/" element={isAuth ?<HomePage /> :<Signin login={loginHandler}></Signin>}></Route>
-          <Route
-            path="/signup"
-            element={isSignedup ? <Signin login={loginHandler}></Signin> : <Signup register={registerHandler}/>}
-          ></Route>
-          <Route
-            path="/signin"
-            element ={ isAuth ? <HomePage user={user}></HomePage> : <Signin login={loginHandler}></Signin>}
-          ></Route>
-          <Route path="/category/index" element={isAuth? <CategoryList user={user}/> : <Signup register={registerHandler}/>}></Route>
-          <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser}></Userprofile> : <Signup register={registerHandler}/>}></Route>
-        </Routes>
-    
-      {/* <Signup/> */}
+
+      <Routes>
+        {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
+        <Route
+          path="/"
+          element={
+            isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>
+          }
+        ></Route>
+        <Route
+          path="/signup"
+          element={
+            isSignedup ? (
+              <Signin login={loginHandler}></Signin>
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+        <Route
+          path="/signin"
+          element={
+            isAuth ? (
+              <HomePage user={user}></HomePage>
+            ) : (
+              <Signin login={loginHandler}></Signin>
+            )
+          }
+        ></Route>
+        <Route
+          path="/category/index"
+          element={
+            isAuth ? (
+              <CategoryList user={user}  />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/category/add"
+          element={
+            isAuth ? (
+              <CategoryCreateForm user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/service/index"
+          element={
+            isAuth ? (
+              <ServicesList user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/service/add"
+          element={
+            isAuth ? (
+              <ServicesCreateForm user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+ <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser}></Userprofile> : <Signup register={registerHandler}/>}></Route>
+      </Routes>
+
+       
     </div>
-
-
-
 
   );
 }

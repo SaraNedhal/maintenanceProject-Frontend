@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import CategoryList from './Category/CategoryList'
-import ServicesList from './services/ServicesList'
+import RequestList from './request/RequestList'
+import OrderList from './Order/OrderList'
 export default function HomePage() {
     return (
         <><div className="container">
@@ -29,7 +29,8 @@ export default function HomePage() {
     </div>
     <div className='container'>
     {/* <CategoryList></CategoryList> */}
-    
+    {/*<RequestList></RequestList>
+    <OrderList></OrderList>*/}
 
     </div>
     

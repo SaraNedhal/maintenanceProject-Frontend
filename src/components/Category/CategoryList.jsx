@@ -3,65 +3,152 @@ import React, { useEffect, useState } from 'react'
 import Category from './Category';
 import  Axios  from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-import CategoryCreateForn from './CategoryCreateForn';
-// import { userInfo } from 'os';
+import CategoryCreateForm from './CategoryCreateForm';
+import CategoryEditForm from './CategoryEditForm'
 
 
 export default function CategoryList(props) {
 
-    const[category,setCategory]= useState([]);
+    const[categories,setCategories]= useState([]);
+    const [isEdit, setIsEdit] = useState(false);
+    const [currentCategory , setCurrentCategory] = useState({});
+    const [file, setFile] = useState();
+    const [showCreateForm , setShowCreateForm] = useState(false);
 
     useEffect(()=>{
         loadCategoryList();
     },[])
+
+    const setHeader = () => {
+        const authHeader ={
+        headers:{
+          "Authorization" : "Bearer " + localStorage.getItem("token")
+        }
+      }
+      return authHeader;
+      }
+
     const loadCategoryList =()=>{
-        Axios.get("/category/index")
+        Axios.get("/category/index" , setHeader())
         .then((response)=>{
             console.log(response);
-            setCategory(response.data.categories);
+            setCategories(response.data.categories);
         })
         .catch((err)=>{
             console.log(err)
         })
     }
-    const addCategory = (category) =>{
-        Axios.post("category/add",category , props.user._id)
-           .then(res =>{
-            console.log("Category Added successfuly !!");
-            loadCategoryList();
-           })
-           .catch(err =>{
-            console.log("Error adding Category");
-            console.log(err);
-           })
-        } 
+    
     const handleCategoryClick = (category) => {
         console.log("Category clicked:",category);
     }
-   /* const allCategory = category.map((category,index)=>(
-        <tr key={index}>
-        
-                <Category {...category}></Category>
-              
-           
-          
+ 
 
-        </tr>
-    )) */
-      const categoryList = category.map((category)=>(
+    const addCategory = (category) =>{
+        let newCategory = {
+            ...category, 
+             userId: props.user.id
+        }
+        const formData = new FormData()
+        formData.append("addCategory",JSON.stringify(newCategory))
+        formData.append("image", file)
+        Axios.post("/category/add",formData , { headers: {'Content-Type': 'multipart/form-data'}})
+           .then(res =>{
+            console.log("Category Added successfuly !!");
+            console.log(res);
+           })
+           .catch(err =>{
+            console.log("Error adding Category :" , err);
+           })
+        } 
+
+
+    const editCategory = (id) => {
+        Axios.get(`/category/edit?id=${id}` , setHeader())
+        .then((res)=> {
+            console.log("category:" , res.data.category);
+            console.log("loading category successfully");
+            let category = res.data.category;
+               //is edit used to display form
+            setIsEdit(true);
+            //current author info
+            setCurrentCategory(category);
+        })
+        .catch(error=>{
+            console.log("error on editing category in createForm frontend , " , error);
+        })
+    }
+
+
+   
+        const updatedCategory = (category) => {
+            // const formData = new FormData()
+            // formData.append("category",JSON.stringify(category))
+            // console.log("category in category list" , category);
+            // console.log("category frontend : , " );
+            // formData.append("image", category.image)
+
+            Axios.put('/category/update' ,category , { headers: {'Content-Type': 'multipart/form-data'}}, setHeader())
+            .then(res=> {
+                console.log("Category updated successfully frontend");
+                console.log(res);
+                loadCategoryList();
+                setIsEdit(false);
+            })
+            .catch(error=>{
+                console.log("error in updating category");
+                console.log(error);
+                console.log("category in category list" , category);
+
+            })
+        }
+
+        const deleteCategory = (id)=> {
+            Axios.delete(`/category/delete?id=${id}` ,  setHeader())
+            .then(res=>{
+                console.log("category record deleted successfully from frontend");
+                console.log(res);
+                loadCategoryList();
+            })
+            .catch(error=>{
+                console.log("error on deleting category frontend");
+                console.log(error);
+            })
+        }
+
+      const categoryList = categories.map((category)=>(
      
         
-                <Category key={category._id} category={category} onClick={handleCategoryClick}></Category>
+                <Category key={category._id} category={category} onClick={handleCategoryClick} editCategory={editCategory} deleteCategory={deleteCategory} ></Category>
               
 
     )) 
     
+//    const loadAllServices = () => {
+//         Axios.get('service/index')
+//         .then()
+//         .catch(error => console.log("failed to load all services for a specific category in the category list front end , " , error));
+//     }
+
 
   return (
-    <><div>CtegoryList</div>
+    <>
      <div>
         <h3>chose a category:</h3>
-        <div className="row">{categoryList}</div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/category/add" class="btn btn-primary me-md-2" type="button">Add Category</a>
+    </div>       
+    <button>Add Category</button>
+ <div className="row">
+    {categoryList}
+    </div>
+
+    {(!isEdit) ?
+    <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
+     :
+    <CategoryEditForm key={currentCategory._id} category={currentCategory} updatedCategory={updatedCategory} setFile={setFile} user={props.user}/>
+
+    }
      </div>
 
     </>
