@@ -143,12 +143,12 @@ export default function CategoryList(props) {
     {categoryList}
     </div>
 
-    {(!isEdit) ?
+    {/* {(!isEdit) ? */}
     <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
-     :
+     {/* : */}
     <CategoryEditForm key={currentCategory._id} category={currentCategory} updatedCategory={updatedCategory} setFile={setFile} user={props.user}/>
 
-    }
+    {/* } */}
      </div>
 
     </>

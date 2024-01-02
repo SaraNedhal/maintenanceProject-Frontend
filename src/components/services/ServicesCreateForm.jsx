@@ -10,8 +10,12 @@ export default function ServicesCreateForm(props) {
     console.log("the category list " , props.categories);
     const handleChange = (event) =>{
         const attributeTochange = event.target.name;
-        const newValue = event.target.value;
+        let newValue = event.target.value;
         const service = {...NewServices}
+        if(event.target.tagName == "SELECT" && event.target.multiple){
+            newValue = Array.from(event.target.options).filter((option)=>option.selected).map((option)=>option.value);
+            console.log("new value: " , newValue);
+    }
         service[attributeTochange]= newValue;
         console.log(service);
         setNewServices(service);
@@ -40,8 +44,9 @@ export default function ServicesCreateForm(props) {
             <input type='text' name='description' onChange={handleChange} className='form-control' ></input>
         </div>
 
-<div class="form-floating">
-  <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="categoryId"  onChange={handleChange}>
+<label for="floatingSelect">Select a Category:</label>
+<div class="form-control mt-2">
+  <select class="form-select" id="floatingSelect"  name="categoryId"  onChange={handleChange} multiple>
     <option selected>Open this select menu to select category</option>
     {props.categories && props.categories.map((category,index) =>( 
             <option key={index} value={category._id}>
@@ -49,7 +54,6 @@ export default function ServicesCreateForm(props) {
           </option>
              ))}
   </select>
-  <label for="floatingSelect">Select a Category:</label>
 </div>
         {/* <label className='mb-3'>Select a Category:</label>
         <div class="form-floating mb-3">

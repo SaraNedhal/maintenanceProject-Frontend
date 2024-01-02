@@ -5,10 +5,12 @@ import Axios from 'axios'
 import {useState} from 'react'
 import {useEffect} from 'react'
 import ServicesCreateForm from './ServicesCreateForm';
+import ServicesEditForm from './ServicesEditForm';
 export default function ServicesList() {
     const [services,setServices] = useState([]);
     const [category, setCategory] = useState([]);
-
+    const [editedService, setEditedService] = useState();
+    const [isEdit, setIsEdit] = useState(false);
     useEffect(()=>{
         loadServiceList()
         loadCategoryList()
@@ -40,8 +42,7 @@ export default function ServicesList() {
 
     const addService = (services) =>{
         console.log("services added in db: " , services);
-        Axios.post("/service/add", services
-        )
+        Axios.post("/service/add", services)
         .then(res => {
             console.log("Services added successfully");
         })
@@ -49,10 +50,29 @@ export default function ServicesList() {
             console.log("Error adding Services");
         })
     }
-    const allServices =    services.map((services,index)=>(
+
+    const editService = (id) => {
+        Axios.get(`/service/edit?id=${id}`)
+        .then(res=>{
+            console.log("edited service: " , res.data.service);
+            let service = res.data.service
+            setIsEdit(true);
+            setEditedService(service);
+        })
+        .catch(error=>{
+            console.log("error on editing service (fetching info for edit): " , error);
+        })
+    }
+    console.log("edited Service" , editedService);
+    const updateService = () => {
+        Axios.put('/service/update')
+        setIsEdit(false);
+
+
+    }
+    const allServices =    services.map((service,index)=>(
         <tr key={index}>
-            <Services {...services}
-            ></Services>
+            <Services {...service} editService={editService} ></Services>
         </tr>
     ))
   return (
@@ -61,7 +81,12 @@ export default function ServicesList() {
         <h3>chose a Service:</h3>
         <div className="row">{allServices}</div>
      </div>
+     { (!isEdit) ?
      <ServicesCreateForm addService={addService} loadCategoryList={loadCategoryList} categories={category} ></ServicesCreateForm>
+        :
+     <ServicesEditForm editService={editService} editedService={editedService} categories={category}/>
+    }
     </div>
+    
   )
 }

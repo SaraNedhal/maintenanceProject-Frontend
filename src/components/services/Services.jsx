@@ -8,15 +8,14 @@ export default function Services(props) {
   return (
           <div className="col-md-4">
          <div className="card">
-          <img src={`/uploads/`} className='card-img-top' alt=""></img>
+          <img src={`/uploads/${props.image}`} className='card-img-top' alt={props.name}></img>
           <div className="card-body">
             <h5 className="card-title">{}</h5>
-           {/* <div className='d-flex justify-content-between'>
-            <button  onClick={()=>editService(category._id)}>Edit</button>
-            <button  onClick={()=>deleteService(category._id)}>Delete</button>            </div> 
-          </div> */}
+           <div className='d-flex justify-content-between'>
+            <button  onClick={()=>props.editService(props._id)}>Edit</button>
+            <button  onClick={()=>props.deleteService(props._id)}>Delete</button>            </div> 
+          </div>
          </div>
-    </div>
     </div>
   
   )
