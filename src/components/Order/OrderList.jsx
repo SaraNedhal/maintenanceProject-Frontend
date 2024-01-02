@@ -89,6 +89,7 @@ export default function OrderList() {
             <tbody>
                 <tr>
                   <th>Request</th>
+                  <th>Problem</th>
                   <th>Order Status</th>
                   <th>amount</th>
 

@@ -50,6 +50,18 @@ export default function OrderEditForm(props) {
             </select>
           <label for="floatingInput">Request</label>
         </div>
+        <div class="form-floating mb-3">
+          <select type="number" class="form-control" id="floatingInput"  name="requestId" onChange={handleChange} >
+          <option value="">Select an option</option>
+            {requests.map((request, index) => (
+            <option key={index} value={request._id}>
+            {request.problem}
+          </option>
+        ))}
+            </select>
+            
+          <label for="floatingInput">Problem</label>
+        </div>
     
         <div class="form-floating mb-3">
           <input type="String" class="form-control" id="floatingInput" name="orderStatus" value={order.orderStatus} onChange={handleChange}  />

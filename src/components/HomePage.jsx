@@ -30,7 +30,7 @@ export default function HomePage() {
     <div className='container'>
     {/* <CategoryList></CategoryList> */}
     {/*<RequestList></RequestList>
-      <OrderList></OrderList>*/}
+    <OrderList></OrderList>*/}
 
     </div>
     
