@@ -9,7 +9,7 @@ export default function Category({category,onClick , editCategory , deleteCatego
 
   // console.log("the category" , category);
 
-console.log("the category image in image component:" , category.image.trim());
+// console.log("the category image in image component:" , category.image.trim());
   return (
     <>
     <div className="col-md-4" onClick={handleCategoryClick} >
