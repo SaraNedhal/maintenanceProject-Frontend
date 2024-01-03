@@ -272,10 +272,10 @@ function App() {
  <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
       </Routes>
 
-       
+        
     </div>
 
   );
 }
-
+// Resloving conflict
 export default App;
