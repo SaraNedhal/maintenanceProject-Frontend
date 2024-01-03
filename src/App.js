@@ -1,17 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Signin from "./components/user/Signin";
 import { Routes, Route, Link } from "react-router-dom";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+// components imports
+import Signin from "./components/user/Signin";
 import Signup from "./components/user/Signup";
 import CategoryList from "./components/Category/CategoryList";
 import HomePage from "./components/HomePage";
 import ServicesList from "./components/services/ServicesList";
 import Userprofile from "./components/user/userProfile";
-
+import UserProfileEditForm from "./components/user/userProfileEditForm";
 import CategoryCreateForm from "./components/Category/CategoryCreateForm";
 import ServicesCreateForm from "./components/services/ServicesCreateForm";
 
@@ -22,8 +22,12 @@ function App() {
    const [user, setUser] = useState({});
  
    const [isSignedup, setIsSignedup] = useState(false);
-   const [isEdit, setIsEdit] = useState(false);
    const [currentUser, setCurrentUser] = useState({})
+   const header = {
+    headers:{
+      "Authorization": "Bearer " +localStorage.getItem("token")
+    }
+  }
    useEffect(() => {
      const user = getUser();
      console.log(user);
@@ -96,7 +100,7 @@ function App() {
    }
 
    const editUserget = (id)=>{
-    Axios.get(`auth/user/edit?id=${id}`)
+    Axios.get(`/auth/user/edit?id=${id}`)
     .then((res)=>{
       console.log(res.data.user)
       console.log("Loaded User edit information")
@@ -107,6 +111,19 @@ function App() {
     })
     .catch((err)=>{
       console.log("Error loading User edit information");
+      console.log(err)
+    })
+   }
+
+   const userProfileUpdate =(userProfile)=>{
+    Axios.put('/auth/user/update', userProfile ,header)
+    .then((res)=>{
+      console.log("User Profile updated sucessfully ")
+      console.log(res)
+      
+    })
+    .catch((err)=>{
+      console.log("err from userProfileUpdate function")
       console.log(err)
     })
    }
@@ -171,6 +188,7 @@ function App() {
             <Link to="/signup">Signup</Link> &nbsp;
             <Link to="/signin">Signin</Link> &nbsp;
             <Link to="/category/index">Category</Link> &nbsp;
+            
           </div>
         )}
       </nav>
@@ -247,7 +265,8 @@ function App() {
             )
           }
         ></Route>
- <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser}></Userprofile> : <Signup register={registerHandler}/>}></Route>
+ <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser} editView={editUserget} updateProfile={Userprofile}></Userprofile> : <Signup register={registerHandler}/>}></Route>
+ <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
       </Routes>
 
        
