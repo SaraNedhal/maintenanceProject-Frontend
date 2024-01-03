@@ -154,17 +154,48 @@ function App() {
 
   return (
     <div className="App">
-      {/* <nav>
-         <HomePage></HomePage>
-        <Link to="/">Home</Link>
-        <Link to="/signin">Signin</Link>
-        <Link to="/signup">Signup</Link>
-     <HomePage></HomePage>
-  
-      </nav>
+       <div >
+        <header className="d-flex flex-wrap align-items-center justify-content-center justify-content--between py-9 mb-7 border-bottom bg-warning">
+            <div className="col-md-3 mb-2 mb-md-0">
+                <a href="/" className="d-inline-flex link-body-emphasis text-decoration-none">
+                    <img src='../maintence5.png' alt="logo" width="90" height="70"  />
+                </a>
+            </div>
 
-      <Signin /> */}
+           
+           {isAuth ? (
+            <>
+             <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+             <li><Link to="/" className="nav-link px-2 link-secondary">Home</Link></li>
+             <li><Link to="category/index" className="nav-link px-2  link-dark">Category</Link></li>
+             <li><Link to="service/index" className="nav-link px-2  link-dark">Services</Link></li>
+             <li><Link to="request/index" className="nav-link px-2  link-dark">Requests</Link></li>
+     
+         </ul>
 
+         <div className="col-md-3 text-end">
+           <button type="button" className="btn btn-dark"><Link to="/logout" onClick={onLogoutHandler} className="nav-link px-2  link-light">Logout</Link></button> &nbsp;
+           <button type="button" className="btn btn-dark"><Link to="/user/profile" className="nav-link px-2  link-light">Profile</Link></button>
+             <button type="button" className="btn btn-dark"><Link to="/signup" className="nav-link px-2  link-light">SignUp</Link></button>
+         </div>
+         </>
+           ):(
+            <>
+            <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><Link to="/" className="nav-link px-2 link-secondary">Home</Link></li>
+            <li><Link to="category/index" className="nav-link px-2  link-dark">Category</Link></li>
+            <li><Link to="service/index" className="nav-link px-2  link-dark">Services</Link></li>
+             </ul>
+             <div className="col-md-3 text-end">
+             <button type="button" className="btn btn-dark"><Link to="/signin" className="nav-link px-2  link-light">Login</Link></button> &nbsp;
+              <button type="button" className="btn btn-dark"><Link to="/signup" className="nav-link px-2  link-light">SignUp</Link></button>
+           </div>
+           </>
+           )}
+           
+        </header>
+        
+    </div>
       <nav>
         {isAuth ? (
           <div>
@@ -194,130 +225,24 @@ function App() {
 
       <Routes>
         {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
-        <Route
-          path="/"
-          element={
-            isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>
-          }
-        ></Route>
-        <Route
-          path="/signup"
-          element={
-            isSignedup ? (
-              <Signin login={loginHandler}></Signin>
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-        <Route
-          path="/signin"
-          element={
-            isAuth ? (
-              <HomePage user={user}></HomePage>
-            ) : (
-              <Signin login={loginHandler}></Signin>
-            )
-          }
-        ></Route>
-        <Route
-          path="/category/index"
-          element={
-            isAuth ? (
-              <CategoryList user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
 
-        <Route
-          path="/category/add"
-          element={
-            isAuth ? (
-              <CategoryCreateForm user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
+        <Route path="/" element={ isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>  } ></Route>
+        <Route  path="/signup" element={isSignedup ? ( <Signin login={loginHandler}></Signin>) : ( <Signup register={registerHandler} />) } ></Route>
+        <Route path="/signin" element={  isAuth ? (  <HomePage user={user}></HomePage>  ) : (  <Signin login={loginHandler}></Signin>)  } ></Route>
+        <Route path="/category/index" element={ ( <CategoryList user={user}  />)}  /> 
+         <Route  path="/category/add" element={ isAuth ? ( <CategoryCreateForm user={user} />) : (<Signup register={registerHandler} /> )    }></Route>
 
-        <Route
-          path="/service/index"
-          element={
-            isAuth ? (
-              <ServicesList user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
+        <Route  path="/service/index" element={  (<ServicesList user={user} /> )} ></Route>
 
-        <Route
-          path="/service/add"
-          element={
-            isAuth ? (
-              <ServicesCreateForm user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-        <Route
-          path="/user/profile"
-          element={
-            isAuth ? (
-              <Userprofile user={currentUser}></Userprofile>
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-        <Route
-          path="/request/index"
-          element={
-            isAuth ? (
-              <RequestList user={currentUser} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-        <Route
-          path="/request/add/:id"
-          element={
-            isAuth ? (
-              <RequestCreateForm user={currentUser} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-        <Route
-          path="/order/index"
-          element={
-            isAuth ? (
-              <OrderList user={currentUser} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-
-        <Route
-          path="/user/profile"
-          element={
-            isAuth ? (
-              <Userprofile
-                user={currentUser}
-                editView={editUserget}
-                updateProfile={Userprofile}
-              ></Userprofile>
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
+        <Route path="/service/add" element={isAuth ? ( <ServicesCreateForm user={user} /> ) : (<Signup register={registerHandler} />) } ></Route>
+       
+       <Route path="/request/index" element={isAuth? <RequestList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
+      <Route path="/request/add/:id" element={isAuth? <RequestCreateForm user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
+     <Route path="/order/index" element={isAuth? <OrderList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
+       
+ <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser} editView={editUserget} updateProfile={Userprofile}></Userprofile> : <Signup register={registerHandler}/>}></Route>
+   {/* <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route> */}
+    <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
 
         {/*   <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route> */}
         <Route
@@ -350,5 +275,5 @@ function App() {
     </div>
   );
 }
-// Resloving conflict
+
 export default App;
