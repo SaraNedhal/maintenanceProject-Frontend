@@ -27,7 +27,7 @@ export default function ServicesCreateForm(props) {
 
   
   return (
-    <div>ServicesCreateForm
+    <div>
          <div>
         <h1>Create Services</h1>
        <form onSubmit={handleSubmit}> 
@@ -68,7 +68,7 @@ export default function ServicesCreateForm(props) {
          </div>
           */}
         <div>
-            <input type='submit' value="Add Service" ></input>
+            <input type='submit' value="Add Service" class="btn btn-sm btn-dark"></input>
         </div>
        </form>
     </div>

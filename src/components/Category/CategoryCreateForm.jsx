@@ -56,7 +56,7 @@ console.log("logged user" , props.user);
         </div>
 
         <div>
-            <input type='submit' value="Add Category"></input>
+            <input type='submit' value="Add Category" class="btn btn-sm btn-dark"></input>
         </div>
 
 

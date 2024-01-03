@@ -9,19 +9,21 @@ export default function Userprofile(props) {
 
   return (
     <div class="form-signin w-75 m-auto mx-auto my-5">
+      <div className='card'>
+      <h5>First Name: <>{userProfile.firstName}</></h5>
+    
+      <h5>Last Name:  <>{userProfile.lastName}</></h5>
       
-      <h1>First Name:</h1>
-      <>{userProfile.firstName}</>
-      <h1>Last Name:</h1>
-      <>{userProfile.lastName}</>
-      <h1>E-mail:</h1>
-      <>{userProfile.emailAddress}</>
-      <h1>Phone Number</h1>
-      <>{userProfile.phoneNumber}</>
+      <h5>E-mail:  <>{userProfile.emailAddress}</></h5>
+     
+      <h5>Phone Number: <>{userProfile.phoneNumber}</></h5>
+      
+      </div>
+    
 
     
         
-        <Link class="btn btn-primary  py-2 mt-3" to="/user/profile/edit" onClick={()=>props.editView(userProfile._id)}>Edit</Link>
+        <Link class="btn btn-dark  py-2 mt-3" to="/user/profile/edit" onClick={()=>props.editView(userProfile._id)}>Edit</Link>
       
       
     </div>
