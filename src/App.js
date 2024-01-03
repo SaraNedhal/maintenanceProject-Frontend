@@ -159,17 +159,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <nav>
-         <HomePage></HomePage>
-        <Link to="/">Home</Link>
-        <Link to="/signin">Signin</Link>
-        <Link to="/signup">Signup</Link>
-     <HomePage></HomePage>
-  
-      </nav>
-
-      <Signin /> */}
-
       <nav>
         {isAuth ? (
 
@@ -202,92 +191,28 @@ function App() {
 
       <Routes>
         {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
-        <Route
-          path="/"
-          element={
-            isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>
-          }
-        ></Route>
-        <Route
-          path="/signup"
-          element={
-            isSignedup ? (
-              <Signin login={loginHandler}></Signin>
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-        <Route
-          path="/signin"
-          element={
-            isAuth ? (
-              <HomePage user={user}></HomePage>
-            ) : (
-              <Signin login={loginHandler}></Signin>
-            )
-          }
-        ></Route>
-        <Route
-          path="/category/index"
-          element={
-            isAuth ? (
-              <CategoryList user={user}  />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
+        <Route path="/" element={ isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>  } ></Route>
+        <Route  path="/signup" element={isSignedup ? ( <Signin login={loginHandler}></Signin>) : ( <Signup register={registerHandler} />) } ></Route>
+        <Route path="/signin" element={  isAuth ? (  <HomePage user={user}></HomePage>  ) : (  <Signin login={loginHandler}></Signin>)  } ></Route>
+        <Route path="/category/index" element={isAuth ? ( <CategoryList user={user}  />) : ( <Signup register={registerHandler} />    )  }  ></Route> 
+         <Route  path="/category/add" element={ isAuth ? ( <CategoryCreateForm user={user} />) : (<Signup register={registerHandler} /> )    }></Route>
 
-        <Route
-          path="/category/add"
-          element={
-            isAuth ? (
-              <CategoryCreateForm user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
+        <Route  path="/service/index" element={ isAuth ? (<ServicesList user={user} /> ) : ( <Signup register={registerHandler} /> ) } ></Route>
 
-        <Route
-          path="/service/index"
-          element={
-            isAuth ? (
-              <ServicesList user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
-
-        <Route
-          path="/service/add"
-          element={
-            isAuth ? (
-              <ServicesCreateForm user={user} />
-            ) : (
-              <Signup register={registerHandler} />
-            )
-          }
-        ></Route>
- <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser}></Userprofile> : <Signup register={registerHandler}/>}></Route>
- <Route path="/request/index" element={isAuth? <RequestList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
- <Route path="/request/add/:id" element={isAuth? <RequestCreateForm user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
- <Route path="/order/index" element={isAuth? <OrderList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
-
-      </Routes>
+        <Route path="/service/add" element={isAuth ? ( <ServicesCreateForm user={user} /> ) : (<Signup register={registerHandler} />) } ></Route>
+       
+       <Route path="/request/index" element={isAuth? <RequestList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
+      <Route path="/request/add/:id" element={isAuth? <RequestCreateForm user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
+     <Route path="/order/index" element={isAuth? <OrderList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
        
  <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser} editView={editUserget} updateProfile={Userprofile}></Userprofile> : <Signup register={registerHandler}/>}></Route>
-
-//  <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route>
- <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
+   {/* <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route> */}
+    <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
 
       </Routes>
 
         
     </div>
-
   );
 }
 // Resloving conflict
