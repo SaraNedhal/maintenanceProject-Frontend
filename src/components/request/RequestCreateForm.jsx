@@ -1,7 +1,14 @@
 import React from 'react'
 import {useState} from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import Axios from 'axios';
 export default function RequestCreateForm(props) {
   const [NewRequest, setNewRequest] = useState({});
+  // const [currentUser , setNewUser] = useState(props.user)
+  // console.log("props.user" , props.user);
+  const navigation = useNavigate();
+  const {id} = useParams();
+  console.log("the service id" , id);
   const handleChange = (event) =>{
     const attributeToChange = event.target.name;
     let newValue = event.target.value;
@@ -11,13 +18,28 @@ export default function RequestCreateForm(props) {
     const request = {...NewRequest}
     request[attributeToChange] = newValue;
     console.log(request);
+    console.log("the user id in requst create list" , props.user._id);
+    request.UserId = props.user._id;
+      console.log("request.UserId" ,  request.UserId );
+    request.serviceId = id;
     setNewRequest(request);
   }
   const handleSubmit = (event) =>{
     event.preventDefault();
-    props.addRequest(NewRequest);
+    addRequest(NewRequest);
+    navigation('/order/index')
   }
 
+  const addRequest = (requests) =>{
+    Axios.post("/request/add", requests)
+    .then(res =>{
+      console.log("Request Added successfully");
+    })
+    .catch(err =>{
+         console.log("Error adding Author");
+         console.log(err);
+    })
+  }
   return (
     <div class="w-75 m-auto mx-auto my-5">
     <form onSubmit={handleSubmit}>

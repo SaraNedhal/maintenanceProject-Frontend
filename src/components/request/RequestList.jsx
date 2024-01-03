@@ -4,7 +4,7 @@ import  Request  from './Request';
 import RequestCreateForm from './RequestCreateForm'
 import RequestEditForm from './RequestEditForm';
 
-export default function RequestList() {
+export default function RequestList(props) {
 
   const [requests, setRequests] = useState([]);
   const [ isEdit, setIsEdit] = useState(false);
@@ -17,7 +17,7 @@ export default function RequestList() {
   
 
  const  loadRequestList= ()=> {
-  Axios.get('request/index')
+  Axios.get('/request/index')
   .then((response)=>{
     console.log("the list of all requests backend to frontend :" , response);
     setRequests(response.data.request);
@@ -26,19 +26,9 @@ export default function RequestList() {
     console.log("failed to get the list of all requests backend to frontend  " , error);
   })
   }
-  const addRequest = (requests) =>{
-    Axios.post("request/add", requests)
-    .then(res =>{
-      console.log("Request Added successfully");
-      loadRequestList();
-    })
-    .catch(err =>{
-         console.log("Error adding Author");
-         console.log(err);
-    })
-  }
+
   const editView = (id) =>{
-    Axios.get(`request/edit?id=${id}`)
+    Axios.get(`/request/edit?id=${id}`)
     .then((res)=>{
       console.log(res.data);
       console.log("Loaded Request Information")
@@ -53,7 +43,7 @@ export default function RequestList() {
   }
 
   const updaterequest = (request) => {
-    Axios.post("request/update",request)
+    Axios.post("/request/update",request)
     .then(res =>{
       console.log("Request Updated successfuly")
       console.log(res);
@@ -65,7 +55,7 @@ export default function RequestList() {
     })
   }
    const deleteRequest = (id) =>{
-    Axios.delete(`request/delete?id=${id}`)
+    Axios.delete(`/request/delete?id=${id}`)
     .then(res =>{
       console.log("Record deleted successfully");
       console.log(res);
@@ -87,7 +77,7 @@ export default function RequestList() {
 
     </tr>
   ))
-
+    console.log("all requests" , allRequests);
   return (
     <div>
       <h1>Request List</h1><div>
@@ -107,7 +97,8 @@ export default function RequestList() {
       </div>
      
      {(!isEdit)?
-      <RequestCreateForm addRequest={addRequest}></RequestCreateForm>
+      // <RequestCreateForm addRequest={addRequest} user={props.user}></RequestCreateForm>
+       null
       :
       <RequestEditForm key={currentRequests._id} request={currentRequests} updaterequest={updaterequest}></RequestEditForm>
 }
