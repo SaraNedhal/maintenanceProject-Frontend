@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 
 export default function CategoryCreateForm(props) {
     const [NewCategory,setNewCategory] = useState({});
+    const [file, setFile] = useState();
+
     const navigate = useNavigate();
 
     const handelChange = (event) =>{
@@ -17,7 +19,7 @@ export default function CategoryCreateForm(props) {
 
     const handleImage = (event) => {
         console.log(event.target.files[0]);
-        props.setFile(event.target.files[0]);
+        setFile(event.target.files[0]);
 
     }
 console.log("logged user" , props.user);
@@ -26,8 +28,14 @@ console.log("logged user" , props.user);
        
     const handleSubmit = (event) =>{
         event.preventDefault();
-        props.addCategory(NewCategory);
-        navigate("/category/index");
+        const formData = new FormData();
+        formData.append("category" , JSON.stringify(NewCategory))
+        console.log("form data category" , formData);
+    console.log("category image:" , file);
+    formData.append("image" , file);
+    console.log("form data image" , formData);
+        props.addCategory(formData);
+        // navigate("/category/index");
     }
 
    
@@ -35,6 +43,7 @@ console.log("logged user" , props.user);
     <>
     <h1 className="mt-5">Create Category:</h1>
     <form onSubmit={handleSubmit} className="w-75 m-auto mx-auto my-5" encType="multipart/form-data">
+
         <div class="mb-3">
             <label className="mt-3">Category Name:</label>
             <input type='text' name='name' onChange={handelChange} className="form-control"></input>
