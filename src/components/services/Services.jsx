@@ -13,6 +13,7 @@ export default function Services(props) {
             <h5 className="card-title">{}</h5>
            <div className='d-flex justify-content-between'>
             <button  onClick={()=>props.editService(props._id)}>Edit</button>
+            <a href={`/request/add/${props._id}`}>Add Request</a>
             <button  onClick={()=>props.deleteService(props._id)}>Delete</button>            </div> 
           </div>
          </div>

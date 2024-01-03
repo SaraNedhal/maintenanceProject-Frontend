@@ -14,7 +14,7 @@ export default function OrderList() {
     },[])
     
     const loadOrderList = ()=>{
-        Axios.get('order/index')
+        Axios.get('/order/index')
         .then((response)=>{
             console.log("the list of all orders backend to frontend :", response);
             setOrder(response.data.order);
@@ -24,7 +24,7 @@ export default function OrderList() {
         })
     }
     const addOrder = (order) =>{
-        Axios.post("order/add",order)
+        Axios.post("/order/add",order)
         .then(res =>{
             console.log("Order Added Successfully")
             loadOrderList();
@@ -35,7 +35,7 @@ export default function OrderList() {
         })
     }
     const editView = (id) =>{
-        Axios.get(`order/edit?id=${id}`)
+        Axios.get(`/order/edit?id=${id}`)
         .then((res)=>{
             console.log(res.data);
             console.log("Loaded Order Information")
@@ -49,7 +49,7 @@ export default function OrderList() {
         })
     }
     const updateorder = (order) =>{
-        Axios.post("order/update",order)
+        Axios.post("/order/update",order)
         .then(res =>{
             console.log("Order Updated successfuly")
             console.log(res);
@@ -61,7 +61,7 @@ export default function OrderList() {
           })
     }
     const deleteOrder = (id) =>{
-        Axios.delete(`order/delete?id=${id}`)
+        Axios.delete(`/order/delete?id=${id}`)
         .then(res =>{
           console.log("Record deleted successfully");
           console.log(res);
