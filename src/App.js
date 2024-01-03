@@ -190,7 +190,7 @@ function App() {
             <Link to="/signin">Signin</Link> &nbsp;
             <Link to="/category/index">Category</Link> &nbsp;
 
-          </div>
+</div>
         )}
       </nav>
 
@@ -267,10 +267,9 @@ function App() {
           }
         ></Route>
  <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser} editView={editUserget} updateProfile={Userprofile}></Userprofile> : <Signup register={registerHandler}/>}></Route>
- <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
 
  <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route>
- 
+ <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
       </Routes>
 
        
