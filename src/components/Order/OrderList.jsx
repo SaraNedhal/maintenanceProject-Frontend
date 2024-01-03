@@ -4,36 +4,48 @@ import React, { useEffect, useState } from 'react'
 import OrderCreateForm from "./OrderCreateForm"
 import OrderEditForm from "./OrderEditForm";
 
-export default function OrderList() {
+export default function OrderList(props) {
     const [order, setOrder] = useState([]);
     const [IsEdit, setIsEdit] = useState(false);
     const [currentOrder,setCurrentOrder] = useState({})
+    const [currentUserOrder,setCurrentUserOrder] = useState([])
 
     useEffect(()=>{
-        loadOrderList();
+        showUserOrders();
     },[])
     
-    const loadOrderList = ()=>{
-        Axios.get('/order/index')
-        .then((response)=>{
-            console.log("the list of all orders backend to frontend :", response);
-            setOrder(response.data.order);
+    // const loadOrderList = ()=>{
+    //     Axios.get('/order/index')
+    //     .then((response)=>{
+    //         console.log("the list of all orders backend to frontend :", response);
+    //         setOrder(response.data.order);
+    //     })
+    //     .catch(err=>{
+    //         console.log(" failed to get the list of all requests backend to frontend", err);
+    //     })
+    // }
+
+    const showUserOrders = (id) => {
+        Axios.get(`/order/show?id=${props.user._id}`)
+        .then(res=>{
+            console.log("the list of all orders for the logged in user");
+            setCurrentUserOrder(res.data.userOrders)
         })
-        .catch(err=>{
-            console.log(" failed to get the list of all requests backend to frontend", err);
+        .catch(error=>{
+            console.log("error on getting the user orders in frontend");
         })
     }
-    const addOrder = (order) =>{
-        Axios.post("/order/add",order)
-        .then(res =>{
-            console.log("Order Added Successfully")
-            loadOrderList();
-        })
-        .catch(err =>{
-            console.log("error adding Order")
-            console.log(err);
-        })
-    }
+    // const addOrder = (order) =>{
+    //     Axios.post("/order/add",order)
+    //     .then(res =>{
+    //         console.log("Order Added Successfully")
+    //         loadOrderList();
+    //     })
+    //     .catch(err =>{
+    //         console.log("error adding Order")
+    //         console.log(err);
+    //     })
+    // }
     const editView = (id) =>{
         Axios.get(`/order/edit?id=${id}`)
         .then((res)=>{
@@ -53,7 +65,7 @@ export default function OrderList() {
         .then(res =>{
             console.log("Order Updated successfuly")
             console.log(res);
-            loadOrderList();
+            showUserOrders();
         })
         .catch(err =>{
             console.log("Error Updating Order");
@@ -65,14 +77,14 @@ export default function OrderList() {
         .then(res =>{
           console.log("Record deleted successfully");
           console.log(res);
-          loadOrderList();
+          showUserOrders();
         })
         .catch(err =>{
           console.log("Error deleting order");
           console.log(err);
         })
        }
-      const allOrders = order.map((order,index)=>(
+      const allOrders = currentUserOrder.map((order,index)=>(
         <tr key={index}>
             <Order {...order}
                 editView={editView}
@@ -103,7 +115,8 @@ export default function OrderList() {
     </div>
    
    {(!IsEdit) ?
-   <OrderCreateForm addOrder={addOrder}></OrderCreateForm>
+//    <OrderCreateForm addOrder={addOrder}></OrderCreateForm>
+    null
     :
    <OrderEditForm key={currentOrder._id} order={currentOrder} updateorder={updateorder}></OrderEditForm>
     
