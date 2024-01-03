@@ -31,6 +31,7 @@ export default function RequestCreateForm(props) {
   }
 
   const addRequest = (requests) =>{
+    console.log("request data to send", requests);
     Axios.post("/request/add", requests)
     .then(res =>{
       console.log("Request Added successfully");
