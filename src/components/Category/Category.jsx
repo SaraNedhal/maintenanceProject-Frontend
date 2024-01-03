@@ -12,14 +12,17 @@ export default function Category({category,onClick , editCategory , deleteCatego
 // console.log("the category image in image component:" , category.image.trim());
   return (
     <>
+
     <div className="col-md-4" onClick={handleCategoryClick} >
-         <div className="card">
-          <img src={`/uploads/${category.image}`} className='card-img-top' alt=""></img>
-          <div className="card-body">
+         <div className="card shadow-sm">
+          <img src={`/uploads/${category.image}`} className="card-img-top bd-placeholder-img " alt=""></img>
+          <div className="card-body text-bg-dark">
             <h5 className="card-title">{category.name}</h5>
            <div className='d-flex justify-content-between'>
-            <button  onClick={()=>editCategory(category._id)}>Edit</button>
-            <button  onClick={()=>deleteCategory(category._id)}>Delete</button>            </div> 
+           <div class="btn-group">
+            <button  type="button" class="btn btn-sm btn-outline-light" onClick={()=>editCategory(category._id)}>Edit</button>
+            <button  type="button" class="btn btn-sm btn-outline-light" onClick={()=>deleteCategory(category._id)}>Delete</button>            </div> 
+          </div>
           </div>
 
          </div>
