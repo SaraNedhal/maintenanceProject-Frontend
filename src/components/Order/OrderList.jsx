@@ -11,8 +11,17 @@ export default function OrderList(props) {
     const [currentUserOrder,setCurrentUserOrder] = useState([])
 
     useEffect(()=>{
-        showUserOrders();
-    },[])
+        // showUserOrders();
+        Axios.get(`/order/show?id=${props.user._id}`)
+        .then(res=>{
+            console.log("the list of all orders for the logged in user");
+            console.log(res.data);
+            setCurrentUserOrder(res.data.userOrders)
+        })
+        .catch(error=>{
+            console.log("error on getting the user orders in frontend");
+        })
+    },[props.user._id])
     
     // const loadOrderList = ()=>{
     //     Axios.get('/order/index')
@@ -26,9 +35,11 @@ export default function OrderList(props) {
     // }
 
     const showUserOrders = (id) => {
+        console.log('user info ********',props.user._id);
         Axios.get(`/order/show?id=${props.user._id}`)
         .then(res=>{
             console.log("the list of all orders for the logged in user");
+            console.log(res.data);
             setCurrentUserOrder(res.data.userOrders)
         })
         .catch(error=>{
