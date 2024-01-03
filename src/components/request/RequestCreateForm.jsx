@@ -41,11 +41,22 @@ export default function RequestCreateForm(props) {
         */}
 
       <select class="form-select" aria-label="Default select example" multiple name="problem" onChange={handleChange}>
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <option selected>Open this select menu</option>
+        <option value="Steering Wheel shaking">Steering Wheel Shaking</option>
+        <option value="Overheating">Overheating</option>
+        <option value="Oil changes;">Oil changes</option>
+         <option value=" garage doors">garage doors</option>
+        <option value="Wall cracks">Wall cracks</option>
+        <option value="Ceiling leaks">eiling leaks</option>
+         <option value="iphone screen repair">iphone screen repair</option>
+        <option value="format iphone">format iphone</option>
+        <option value="format laptop">format laptop</option>
+        <option value="cleaning chairs">cleaning chairs</option>
+        <option value="poilish table">poilish tables</option>
+        <option value="painting chairs">painting chairs</option>
       </select>
+
+     
       
         <button class="btn btn-primary  py-2 mt-3" type="submit">Create Request</button>
       

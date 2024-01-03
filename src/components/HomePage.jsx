@@ -9,9 +9,9 @@ export default function HomePage() {
 <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-dark">
     <div class="col-lg-8 px-0">
    {/*<img src='../Maintenance4.png' alt='pic' class="float-end" width="140" height="140"></img>*/} 
-      <h1 class="display-4 fst-italic text-light"  style={{textAlign:"center"}}>Title of a longer featured blog post</h1>
-      <p class="lead my-3 text-light" style={{alignItems:"center"}}>Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
-      <p class="lead mb-0 text-light"><a href="category/index" class=" text-light fw-bold " >Continue reading...</a></p>
+      <h1 class="display-4 fst-italic text-light"  style={{textAlign:"left"}}>FixMe</h1>
+      <p class="lead my-3 text-light" style={{textAlign:"left"}}>FixMe is comprehensive maintenance platform, which includes repairs for your home, cars,electronics,and furniture</p>
+      <p class="lead mb-0 text-light" style={{textAlign:"left"}}><a href="category/index" class=" text-light fw-bold " >Continue reading...</a></p>
       
     </div>
     
