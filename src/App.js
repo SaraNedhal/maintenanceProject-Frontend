@@ -14,6 +14,7 @@ import Userprofile from "./components/user/userProfile";
 import UserProfileEditForm from "./components/user/userProfileEditForm";
 import CategoryCreateForm from "./components/Category/CategoryCreateForm";
 import ServicesCreateForm from "./components/services/ServicesCreateForm";
+import ServiceDetails from "./components/services/ServiceDetails";
 
 function App() {
    //check if user authenticated
@@ -188,7 +189,7 @@ function App() {
             <Link to="/signup">Signup</Link> &nbsp;
             <Link to="/signin">Signin</Link> &nbsp;
             <Link to="/category/index">Category</Link> &nbsp;
-            
+
           </div>
         )}
       </nav>
@@ -267,6 +268,9 @@ function App() {
         ></Route>
  <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser} editView={editUserget} updateProfile={Userprofile}></Userprofile> : <Signup register={registerHandler}/>}></Route>
  <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
+
+ <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route>
+ 
       </Routes>
 
        
