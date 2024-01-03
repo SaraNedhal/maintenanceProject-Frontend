@@ -48,7 +48,7 @@ console.log("State categories :" , service.categoryId);
 // ))
 
   return (
-    <div>Services edit Form
+    <div>
     <div>
    <h1>Edit Services</h1>
   <form onSubmit={handleSubmit}> 
@@ -93,7 +93,7 @@ console.log("State categories :" , service.categoryId);
     </div>
      */}
    <div>
-       <input type='submit' value="Edit Service" ></input>
+       <input type='submit' value="Edit Service" class="btn btn-sm btn-dark"></input>
    </div>
   </form>
   {/* {allcat} */}

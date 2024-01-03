@@ -73,6 +73,7 @@ export default function CategoryList(props) {
         } 
 
 
+
     const editCategory = (id) => {
         Axios.get(`/category/edit?id=${id}` , setHeader())
         .then((res)=> {
@@ -149,13 +150,14 @@ export default function CategoryList(props) {
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a href="/category/add" class="btn btn-primary me-md-2" type="button">Add Category</a>
     </div>       
-    <button>Add Category</button>
+   
  <div className="row">
     {categoryList}
     </div>
 
     {(!isEdit) ?
-    <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
+    // <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
+    null
      :
     <CategoryEditForm key={currentCategory._id} category={currentCategory} updatedCategory={updatedCategory} setFile={setFile} user={props.user}/>
     }
