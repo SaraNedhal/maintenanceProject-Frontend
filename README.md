@@ -1,6 +1,6 @@
 
-# FixMe site
-FixMe website is a full stack and innovative maintenance project object. This repository provides the whole source code, design assets, and interactive elements for our website.
+# FixIt site
+FixIt website is a full stack and innovative maintenance project object. This repository provides the whole source code, design assets, and interactive elements for our website.
 
 ## Overview
 Welcome to our comprehensive maintenance platform, which includes repairs for your home, automobile, and electronics. Such centralized services are not common in Bahrain's market; instead, independent providers cater to specialized demands. Our platform aspires to revolutionize by bringing together various services under one roof. We expedite repairs by linking consumers with skilled professionals, giving quick solutions tailored to their needs. This strategy intends to digitalize and improve the maintenance sector, providing ease and reinventing repair services for Bahrain's clients."
@@ -59,7 +59,7 @@ Welcome to our comprehensive maintenance platform, which includes repairs for yo
    - React js
    - Becrybt
 ## Trello Board
-[Trello Board]()
+[Trello Board](https://trello.com/invite/b/lHkNNVzy/ATTI0b5dd8bc7c787e81dfe5d3511bd630edE73E8EBB/maintenanceproject-trello)
 
 
 ## Future Features

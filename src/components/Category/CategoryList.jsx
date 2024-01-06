@@ -146,18 +146,20 @@ export default function CategoryList(props) {
   return (
     <>
      <div>
-        <h3>chose a category:</h3>
+
+        <h3>choose a category</h3>
+      
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="/category/add" class="btn btn-primary me-md-2" type="button">Add Category</a>
+        {/* <a href="/category/add" class="btn btn-dark me-md-2" type="button">Add Category</a> */}
     </div>       
-   
+   <br/>
  <div className="row">
     {categoryList}
     </div>
 
     {(!isEdit) ?
-    // <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
-    null
+    <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
+    
      :
     <CategoryEditForm key={currentCategory._id} category={currentCategory} updatedCategory={updatedCategory} setFile={setFile} user={props.user}/>
     }

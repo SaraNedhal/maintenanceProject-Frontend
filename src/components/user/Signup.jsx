@@ -46,7 +46,7 @@ export default function Signup(props) {
           <input type="text" class="form-control" id="floatingPassword" placeholder="Password" name="phoneNumber" onChange={handleChange}/>
           <label for="floatingPassword">Phone Number</label>
         </div>
-        <button class="btn btn-primary  py-2 mt-3" type="submit">Sign Up</button>
+        <button class="btn btn-dark  py-2 mt-3" type="submit">Sign Up</button>
       
       </form>
     </div>
