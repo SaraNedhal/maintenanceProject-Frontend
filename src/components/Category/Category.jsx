@@ -23,7 +23,11 @@ Category({category,onClick , editCategory , deleteCategory}) {
            <div class="btn-group">
             <button  type="button" class="btn btn-sm btn-outline-light" onClick={()=>editCategory(category._id)}>Edit</button>
             <button  type="button" class="btn btn-sm btn-outline-light" onClick={()=>deleteCategory(category._id)}>Delete</button>            </div> 
-          </div>
+            {/*need to redirect to serviece
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+           <a href="/service/add" class="btn btn-dark me-md-2" type="button">view service</a>
+  </div>*/}
+         </div>
           </div>
 
          </div>

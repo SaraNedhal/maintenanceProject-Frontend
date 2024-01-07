@@ -44,7 +44,7 @@ export default function UserProfileEditForm(props) {
         <input type="text" class="form-control" id="floatingPassword" placeholder="Password" name="phoneNumber"   value={userProfile.phoneNumber} onChange={handleChange}/>
         <label for="floatingPassword">Phone Number</label>
       </div>
-      <button class="btn btn-primary  py-2 mt-3" type="submit">Update</button>
+      <button class="btn btn-dark  py-2 mt-3" type="submit">Update</button>
     
     </form>
   </div>

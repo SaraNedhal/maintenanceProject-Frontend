@@ -25,6 +25,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   //them store user in state
   const [user, setUser] = useState({});
+  const [userDetails,setUserDetails]=useState()
 
   const [isSignedup, setIsSignedup] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
@@ -42,6 +43,13 @@ function App() {
       setIsAuth(true);
       setUser(user);
       userShowGet(user.id);
+      Axios.get(`auth/user/profile?id=${user.id}`)
+      .then(res=>{
+        setUserDetails(res.data.user);
+      })
+      .catch(err=>{
+        console.log(err);
+      })
     } else {
       localStorage.removeItem("token");
       setIsAuth(false);
@@ -176,6 +184,8 @@ function App() {
              <li><Link to="category/index" className="nav-link px-2  link-dark">Category</Link></li>
              <li><Link to="service/index" className="nav-link px-2  link-dark">Services</Link></li>
              <li><Link to="request/index" className="nav-link px-2  link-dark">Requests</Link></li>
+             <li><Link to="order/index" className="nav-link px-2  link-dark">Orders</Link></li>
+
      
          </ul>
 
@@ -205,32 +215,7 @@ function App() {
         </header>
         
     </div>
-      <nav>
-        {isAuth ? (
-          <div>
-            {/* &nbsp; non breakable space -> add a space between the links */}
-            <Link to="/">Home</Link> &nbsp;
-            <Link to="/logout" onClick={onLogoutHandler}>
-              Logout
-            </Link>
-            &nbsp;
-            <Link to="/category/index">Category</Link>&nbsp;
-            <Link to="/user/profile">Profile</Link>
-            <Link to="/service/index">Service</Link> &nbsp;
-            <Link to="/request/index">Request</Link> &nbsp;
-          </div>
-        ) : (
-          // else if the user is not authenticated then show this nav bar
-          <div>
-            {/* &nbsp; non breakable space -> add a space between the links */}
-            <Link to="/">Home</Link> &nbsp;
-            <Link to="/signup">Signup</Link> &nbsp;
-            <Link to="/signin">Signin</Link> &nbsp;
-            <Link to="/category/index">Category</Link> &nbsp;
-            <Link to="/service/index">Service</Link> &nbsp;
-          </div>
-        )}
-      </nav>
+    
 
       <Routes>
         {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
@@ -241,7 +226,7 @@ function App() {
         <Route path="/category/index" element={ ( <CategoryList user={user}  />)}  /> 
          <Route  path="/category/add" element={ isAuth ? ( <CategoryCreateForm user={user} />) : (<Signup register={registerHandler} /> )    }></Route>
 
-        <Route  path="/service/index" element={  (<ServicesList user={user} /> )} ></Route>
+        <Route  path="/service/index" element={  (user && userDetails?<ServicesList user={userDetails} />:<HomePage /> )} ></Route>
 
         <Route path="/service/add" element={isAuth ? ( <ServicesCreateForm user={user} /> ) : (<Signup register={registerHandler} />) } ></Route>
        

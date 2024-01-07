@@ -7,7 +7,7 @@ import {useEffect} from 'react'
 import ServicesCreateForm from './ServicesCreateForm';
 import ServicesEditForm from './ServicesEditForm';
 import {  Routes, Route, Link, useNavigate } from "react-router-dom";
-export default function ServicesList() {
+export default function ServicesList(props) {
     const [services,setServices] = useState([]);
     const [category, setCategory] = useState([]);
     const [editedService, setEditedService] = useState();
@@ -103,7 +103,7 @@ export default function ServicesList() {
 
     const allServices =    services.map((service,index)=>(
         <tr key={index}>
-            <Services {...service} editService={editService} deleteService={deleteService}></Services>
+            <Services {...service} editService={editService} deleteService={deleteService} user={props.user}></Services>
         </tr>
     ))
   return (
@@ -130,6 +130,11 @@ export default function ServicesList() {
 }
      
      {/* </div>
+    <div>
+          <div>
+        <h3>chose a Service</h3>
+        <div className="grid">{allServices}</div>
+     </div>
      { (!isEdit) ?
         :
     }

@@ -59,7 +59,8 @@ export default function Signup(props) {
           <input type="file" class="form-control"  name="image" onChange={handleImg}/>
           <label for="floatingPassword">Upload Image</label>
         </div>
-        <button class="btn btn-primary  py-2 mt-3" type="submit">Sign Up</button>
+
+        <button class="btn btn-dark  py-2 mt-3" type="submit">Sign Up</button>
       
       </form>
     </div>

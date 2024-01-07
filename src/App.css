@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
 .profileIcon{
   width: auto;
   height: 50px;
@@ -50,4 +51,12 @@
   height: auto;
   text-align: center;
   margin: 10px;
+
+
+.grid{
+  display: grid;
+  grid-template-columns: auto auto auto;
+ 
+  padding: 10px;
+
 }
