@@ -61,7 +61,9 @@ Welcome to our comprehensive maintenance platform, which includes repairs for yo
 ## Trello Board
 [Trello Board](https://trello.com/invite/b/lHkNNVzy/ATTI0b5dd8bc7c787e81dfe5d3511bd630edE73E8EBB/maintenanceproject-trello)
 
-
+## unsolved problems
+- click on categories and it should show the list of services
+- fix the orders model
 ## Future Features
 - maps
 - Include search functionalities
