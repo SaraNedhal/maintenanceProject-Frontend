@@ -73,7 +73,7 @@ export default function OrderEditForm(props) {
         </div>
         
 
-        <button class="btn btn-primary  py-2 mt-3" type="submit">update Order</button>
+        <button class="btn btn-dark py-2 mt-3" type="submit">update Order</button>
       
       </form>
     </div>

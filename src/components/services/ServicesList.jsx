@@ -6,7 +6,7 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import ServicesCreateForm from './ServicesCreateForm';
 import ServicesEditForm from './ServicesEditForm';
-export default function ServicesList() {
+export default function ServicesList(props) {
     const [services,setServices] = useState([]);
     const [category, setCategory] = useState([]);
     const [editedService, setEditedService] = useState();
@@ -99,14 +99,14 @@ export default function ServicesList() {
 
     const allServices =    services.map((service,index)=>(
         <tr key={index}>
-            <Services {...service} editService={editService} deleteService={deleteService}></Services>
+            <Services {...service} editService={editService} deleteService={deleteService} user={props.user}></Services>
         </tr>
     ))
   return (
-    <div>ServicesList
+    <div>
           <div>
-        <h3>chose a Service:</h3>
-        <div className="row">{allServices}</div>
+        <h3>chose a Service</h3>
+        <div className="grid">{allServices}</div>
      </div>
      { (!isEdit) ?
      <ServicesCreateForm addService={addService} loadCategoryList={loadCategoryList} categories={category}  ></ServicesCreateForm>

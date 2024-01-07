@@ -50,7 +50,7 @@ export default function RequestEditForm(props) {
         <option value="3">Three</option>
       </select>
       
-        <button class="btn btn-primary  py-2 mt-3" type="submit">Update Request</button>
+        <button class="btn btn-dark  py-2 mt-3" type="submit">Update Request</button>
       
       </form>
     </div>

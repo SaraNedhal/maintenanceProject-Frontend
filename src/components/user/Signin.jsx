@@ -31,7 +31,7 @@ const loginHandler = (e) => {
       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" onChange={handleChange}/>
       <label for="floatingPassword">Password</label>
     </div>
-    <button class="btn btn-primary  py-2 mt-3" type="submit">Sign in</button>
+    <button class="btn btn-dark  py-2 mt-3" type="submit">Sign in</button>
     
   </form>
 </div>
