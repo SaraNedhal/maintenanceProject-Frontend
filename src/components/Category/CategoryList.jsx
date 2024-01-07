@@ -146,6 +146,9 @@ export default function CategoryList(props) {
   return (
     <>
      <div>
+        <h3>chose a category:</h3>
+    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="/category/add" className="btn btn-primary me-md-2" type="button">Add Category</a>
 
         <h3>choose a category</h3>
       

@@ -37,9 +37,26 @@
   }
 }
 
+.profileIcon{
+  width: auto;
+  height: 50px;
+  border-radius: 50px;
+}
+.profileButton{
+  background: none;
+  border: none;
+}
+.userProfile{
+  width: 10vw; 
+  height: auto;
+  text-align: center;
+  margin: 10px;
+
+
 .grid{
   display: grid;
   grid-template-columns: auto auto auto;
  
   padding: 10px;
+
 }
