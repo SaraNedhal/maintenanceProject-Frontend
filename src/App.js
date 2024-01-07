@@ -41,6 +41,7 @@ function App() {
     if (user) {
       setIsAuth(true);
       setUser(user);
+      userShowGet(user.id);
     } else {
       localStorage.removeItem("token");
       setIsAuth(false);
@@ -56,7 +57,11 @@ function App() {
   const registerHandler = (user) => {
     // user has all the user info -> firstname and lastname, email address, password
     //passing user object with post method
-    Axios.post("auth/signup", user)
+    Axios.post("auth/signup", user,{
+      headers:{
+        'Content-Type': 'multipart/form-data'
+      }
+    })
       .then((res) => {
         console.log(res);
         setIsSignedup(true);
@@ -80,6 +85,7 @@ function App() {
           //if  else the user is not found then setIsAuth is false and set user will equal null
           user ? setIsAuth(true) : setIsAuth(false);
           user ? setUser(user) : setUser(null);
+          userShowGet(user.id)
           navigate("/");
         }
       })
@@ -163,7 +169,7 @@ function App() {
             </div>
 
            
-           {isAuth ? (
+           {isAuth && currentUser ? (
             <>
              <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
              <li><Link to="/" className="nav-link px-2 link-secondary">Home</Link></li>
@@ -175,8 +181,11 @@ function App() {
 
          <div className="col-md-3 text-end">
            <button type="button" className="btn btn-dark"><Link to="/logout" onClick={onLogoutHandler} className="nav-link px-2  link-light">Logout</Link></button> &nbsp;
-           <button type="button" className="btn btn-dark"><Link to="/user/profile" className="nav-link px-2  link-light">Profile</Link></button>
              <button type="button" className="btn btn-dark"><Link to="/signup" className="nav-link px-2  link-light">SignUp</Link></button>
+             <button type="button" className="profileButton"><Link to="/user/profile" className="nav-link px-2  link-light"> 
+                <img className="profileIcon" src={"/uploads/"+currentUser.image} alt=""/>
+                  </Link></button>
+
          </div>
          </>
            ):(

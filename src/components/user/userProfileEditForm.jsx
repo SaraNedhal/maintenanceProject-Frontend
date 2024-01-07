@@ -24,7 +24,7 @@ export default function UserProfileEditForm(props) {
       
     {/* onSumbit should have editget function from the app.js  */}
   <form onSubmit={handleSubmit}>
-      {/* <img class="mb-4" src="" alt="" width="72" height="57"/> */}
+      <img class="mb-4" src={"/uploads/"+userProfile.image} alt="" width="90" height="78"/>
       <h1 class="h3 mb-3 fw-normal">User Profile</h1>
   
       <div class="form-floating mb-3">
