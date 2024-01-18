@@ -25,7 +25,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   //them store user in state
   const [user, setUser] = useState({});
-  const [userDetails,setUserDetails]=useState()
+  const [userDetails, setUserDetails] = useState();
 
   const [isSignedup, setIsSignedup] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
@@ -44,12 +44,12 @@ function App() {
       setUser(user);
       userShowGet(user.id);
       Axios.get(`auth/user/profile?id=${user.id}`)
-      .then(res=>{
-        setUserDetails(res.data.user);
-      })
-      .catch(err=>{
-        console.log(err);
-      })
+        .then((res) => {
+          setUserDetails(res.data.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       localStorage.removeItem("token");
       setIsAuth(false);
@@ -65,10 +65,10 @@ function App() {
   const registerHandler = (user) => {
     // user has all the user info -> firstname and lastname, email address, password
     //passing user object with post method
-    Axios.post("auth/signup", user,{
-      headers:{
-        'Content-Type': 'multipart/form-data'
-      }
+    Axios.post("auth/signup", user, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     })
       .then((res) => {
         console.log(res);
@@ -93,7 +93,7 @@ function App() {
           //if  else the user is not found then setIsAuth is false and set user will equal null
           user ? setIsAuth(true) : setIsAuth(false);
           user ? setUser(user) : setUser(null);
-          userShowGet(user.id)
+          userShowGet(user.id);
           navigate("/");
         }
       })
@@ -168,75 +168,242 @@ function App() {
 
   return (
     <div className="App">
-       <div >
+      <div>
         <header className="d-flex flex-wrap align-items-center justify-content-center justify-content--between py-9 mb-7 border-bottom bg-warning">
-            <div className="col-md-3 mb-2 mb-md-0">
-                <a href="/" className="d-inline-flex link-body-emphasis text-decoration-none">
-                    <img src='../maintence5.png' alt="logo" width="90" height="70"  />
-                </a>
-            </div>
+          <div className="col-md-3 mb-2 mb-md-0">
+            <a
+              href="/"
+              className="d-inline-flex link-body-emphasis text-decoration-none"
+            >
+              <img src="../maintence5.png" alt="logo" width="90" height="70" />
+            </a>
+          </div>
 
-           
-           {isAuth && currentUser ? (
+          {isAuth && currentUser ? (
             <>
-             <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-             <li><Link to="/" className="nav-link px-2 link-secondary">Home</Link></li>
-             <li><Link to="category/index" className="nav-link px-2  link-dark">Category</Link></li>
-             <li><Link to="service/index" className="nav-link px-2  link-dark">Services</Link></li>
-             <li><Link to="request/index" className="nav-link px-2  link-dark">Requests</Link></li>
-             <li><Link to="order/index" className="nav-link px-2  link-dark">Orders</Link></li>
+              <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                  <Link to="/" className="nav-link px-2 link-secondary">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="category/index"
+                    className="nav-link px-2  link-dark"
+                  >
+                    Category
+                  </Link>
+                </li>
+                <li>
+                  <Link to="service/index" className="nav-link px-2  link-dark">
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="request/index" className="nav-link px-2  link-dark">
+                    Requests
+                  </Link>
+                </li>
+                <li>
+                  <Link to="order/index" className="nav-link px-2  link-dark">
+                    Orders
+                  </Link>
+                </li>
+              </ul>
 
-     
-         </ul>
-
-         <div className="col-md-3 text-end">
-           <button type="button" className="btn btn-dark"><Link to="/logout" onClick={onLogoutHandler} className="nav-link px-2  link-light">Logout</Link></button> &nbsp;
-             <button type="button" className="btn btn-dark"><Link to="/signup" className="nav-link px-2  link-light">SignUp</Link></button>
-             <button type="button" className="profileButton"><Link to="/user/profile" className="nav-link px-2  link-light"> 
-                <img className="profileIcon" src={"/uploads/"+currentUser.image} alt=""/>
-                  </Link></button>
-
-         </div>
-         </>
-           ):(
+              <div className="col-md-3 text-end">
+                <button type="button" className="btn btn-dark">
+                  <Link
+                    to="/logout"
+                    onClick={onLogoutHandler}
+                    className="nav-link px-2  link-light"
+                  >
+                    Logout
+                  </Link>
+                </button>{" "}
+                &nbsp;
+                <button type="button" className="btn btn-dark">
+                  <Link to="/signup" className="nav-link px-2  link-light">
+                    SignUp
+                  </Link>
+                </button>
+                <button type="button" className="profileButton">
+                  <Link
+                    to="/user/profile"
+                    className="nav-link px-2  link-light"
+                  >
+                    <img
+                      className="profileIcon"
+                      src={"/uploads/" + currentUser.image}
+                      alt=""
+                    />
+                  </Link>
+                </button>
+              </div>
+            </>
+          ) : (
             <>
-            <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><Link to="/" className="nav-link px-2 link-secondary">Home</Link></li>
-            <li><Link to="category/index" className="nav-link px-2  link-dark">Category</Link></li>
-            <li><Link to="service/index" className="nav-link px-2  link-dark">Services</Link></li>
-             </ul>
-             <div className="col-md-3 text-end">
-             <button type="button" className="btn btn-dark"><Link to="/signin" className="nav-link px-2  link-light">Login</Link></button> &nbsp;
-              <button type="button" className="btn btn-dark"><Link to="/signup" className="nav-link px-2  link-light">SignUp</Link></button>
-           </div>
-           </>
-           )}
-           
+              <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                  <Link to="/" className="nav-link px-2 link-secondary">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="category/index"
+                    className="nav-link px-2  link-dark"
+                  >
+                    Category
+                  </Link>
+                </li>
+                <li>
+                  <Link to="service/index" className="nav-link px-2  link-dark">
+                    Services
+                  </Link>
+                </li>
+              </ul>
+              <div className="col-md-3 text-end">
+                <button type="button" className="btn btn-dark">
+                  <Link to="/signin" className="nav-link px-2  link-light">
+                    Login
+                  </Link>
+                </button>{" "}
+                &nbsp;
+                <button type="button" className="btn btn-dark">
+                  <Link to="/signup" className="nav-link px-2  link-light">
+                    SignUp
+                  </Link>
+                </button>
+              </div>
+            </>
+          )}
         </header>
-        
-    </div>
-    
+      </div>
 
       <Routes>
         {/* if user is authenticated then go to home page which is authorlist else if user is not authenticated (not logged in) then display signin page */}
 
-        <Route path="/" element={ isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>  } ></Route>
-        <Route  path="/signup" element={isSignedup ? ( <Signin login={loginHandler}></Signin>) : ( <Signup register={registerHandler} />) } ></Route>
-        <Route path="/signin" element={  isAuth ? (  <HomePage user={user}></HomePage>  ) : (  <Signin login={loginHandler}></Signin>)  } ></Route>
-        <Route path="/category/index" element={ ( <CategoryList user={user}  />)}  /> 
-         <Route  path="/category/add" element={ isAuth ? ( <CategoryCreateForm user={user} />) : (<Signup register={registerHandler} /> )    }></Route>
+        <Route
+          path="/"
+          element={
+            isAuth ? <HomePage /> : <Signin login={loginHandler}></Signin>
+          }
+        ></Route>
+        <Route
+          path="/signup"
+          element={
+            isSignedup ? (
+              <Signin login={loginHandler}></Signin>
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+        <Route
+          path="/signin"
+          element={
+            isAuth ? (
+              <HomePage user={user}></HomePage>
+            ) : (
+              <Signin login={loginHandler}></Signin>
+            )
+          }
+        ></Route>
+        <Route path="/category/index" element={<CategoryList user={user} />} />
+        <Route
+          path="/category/add"
+          element={
+            isAuth ? (
+              <CategoryCreateForm user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
 
-        <Route  path="/service/index" element={  (user && userDetails?<ServicesList user={userDetails} />:<HomePage /> )} ></Route>
+        <Route
+          path="/service/index"
+          element={
+            user && userDetails ? (
+              <ServicesList user={userDetails} />
+            ) : (
+              <HomePage />
+            )
+          }
+        ></Route>
 
-        <Route path="/service/add" element={isAuth ? ( <ServicesCreateForm user={user} /> ) : (<Signup register={registerHandler} />) } ></Route>
-       
-       <Route path="/request/index" element={isAuth? <RequestList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
-      <Route path="/request/add/:id" element={isAuth? <RequestCreateForm user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
-     <Route path="/order/index" element={isAuth? <OrderList user={currentUser}/> : <Signup register={registerHandler}/>}></Route>
-       
- <Route path="/user/profile" element={isAuth? <Userprofile user={currentUser} editView={editUserget} updateProfile={Userprofile}></Userprofile> : <Signup register={registerHandler}/>}></Route>
-   {/* <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route> */}
-    <Route path="/user/profile/edit" element={isAuth? <UserProfileEditForm user={currentUser} updateProfile={userProfileUpdate}/>: <Signup register={registerHandler}/>}></Route>
+        <Route
+          path="/service/add"
+          element={
+            isAuth ? (
+              <ServicesCreateForm user={user} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/request/index"
+          element={
+            isAuth ? (
+              <RequestList user={currentUser} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+        <Route
+          path="/request/add/:id"
+          element={
+            isAuth ? (
+              <RequestCreateForm user={currentUser} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+        <Route
+          path="/order/index"
+          element={
+            isAuth ? (
+              <OrderList user={currentUser} />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+
+        <Route
+          path="/user/profile"
+          element={
+            isAuth ? (
+              <Userprofile
+                user={currentUser}
+                editView={editUserget}
+                updateProfile={Userprofile}
+              ></Userprofile>
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
+        {/* <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route> */}
+        <Route
+          path="/user/profile/edit"
+          element={
+            isAuth ? (
+              <UserProfileEditForm
+                user={currentUser}
+                updateProfile={userProfileUpdate}
+              />
+            ) : (
+              <Signup register={registerHandler} />
+            )
+          }
+        ></Route>
 
         {/*   <Route path="/service/detail" element={isAuth? <ServiceDetails user={user}/> : <Signup register={registerHandler}/>}></Route> */}
         <Route

@@ -142,34 +142,27 @@ export default function CategoryList(props) {
 //         .catch(error => console.log("failed to load all services for a specific category in the category list front end , " , error));
 //     }
 
-
-  return (
+return (
     <>
-     <div>
-        <h3>chose a category:</h3>
-    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="/category/add" className="btn btn-primary me-md-2" type="button">Add Category</a>
-
-        <h3>choose a category</h3>
-      
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        {/* <a href="/category/add" class="btn btn-dark me-md-2" type="button">Add Category</a> */}
-    </div>       
-   <br/>
- <div className="row">
-    {categoryList}
-    </div>
-
-    {(!isEdit) ?
-    <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user}/>
-    
-     :
-    <CategoryEditForm key={currentCategory._id} category={currentCategory} updatedCategory={updatedCategory} setFile={setFile} user={props.user}/>
-    }
-     </div>
-
+      <div>
+        <h3>Choose a category:</h3>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a href="/category/add" className="btn btn-primary me-md-2" type="button">Add Category</a>
+        </div>
+  
+        <br />
+  
+        <div className="row">
+          {categoryList}
+        </div>
+  
+        {(!isEdit) ?
+          <CategoryCreateForm addCategory={addCategory} setFile={setFile} user={props.user} />
+          :
+          <CategoryEditForm key={currentCategory._id} category={currentCategory} updatedCategory={updatedCategory} setFile={setFile} user={props.user} />
+        }
+      </div>
     </>
-  )
-}
-
+  );
+    }  
 
